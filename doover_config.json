@@ -22,12 +22,12 @@
             "type": "object",
             "properties": {
                 "dv_proc_subscriptions": {
-                    "title": "Channel Subscriptions",
+                    "title": "Subscription",
                     "x-name": "dv_proc_subscriptions",
                     "x-hidden": false,
                     "type": "array",
                     "x-required": true,
-                    "description": "Channels to subscribe to for message alerts",
+                    "description": "A list of channels to subscribe to.",
                     "items": {
                         "title": "Channel Subscription",
                         "x-name": "dv_proc_subscription",
@@ -44,7 +44,7 @@
                     "format": "doover-schedule",
                     "type": "string",
                     "x-required": true,
-                    "description": "Schedule for offline and threshold checks (e.g., rate(5 minutes))"
+                    "description": "Specify a schedule to run this task."
                 },
                 "slack_webhook_url": {
                     "title": "Slack Webhook URL",
@@ -58,7 +58,10 @@
                     "title": "Slack Channel Override",
                     "x-name": "slack_channel_override",
                     "x-hidden": false,
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Optional: Override the default webhook channel (e.g., #alerts)",
                     "default": ""
@@ -67,7 +70,10 @@
                     "title": "Slack Bot Username",
                     "x-name": "slack_bot_username",
                     "x-hidden": false,
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Display name for the bot in Slack",
                     "default": "Doover Alerts"
@@ -76,7 +82,10 @@
                     "title": "Enable Channel Alerts",
                     "x-name": "enable_channel_alerts",
                     "x-hidden": false,
-                    "type": ["boolean", "null"],
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Send Slack notifications when subscribed channels receive messages",
                     "default": true
@@ -85,7 +94,10 @@
                     "title": "Channel Message Template",
                     "x-name": "channel_message_template",
                     "x-hidden": false,
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Message template for channel alerts. Use {channel}, {data}, {device} placeholders",
                     "default": "New message on {channel} from {device}: {data}"
@@ -94,27 +106,36 @@
                     "title": "Enable Offline Alerts",
                     "x-name": "enable_offline_alerts",
                     "x-hidden": false,
-                    "type": ["boolean", "null"],
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Send Slack notifications when devices go offline",
                     "default": false
                 },
-                "offline_threshold_minutes": {
+                "offline_threshold_(minutes)": {
                     "title": "Offline Threshold (minutes)",
-                    "x-name": "offline_threshold_minutes",
+                    "x-name": "offline_threshold_(minutes)",
                     "x-hidden": false,
-                    "type": ["integer", "null"],
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Minutes before a device is considered offline and alert is sent",
                     "default": 30,
                     "minimum": 1,
                     "maximum": 1440
                 },
-                "offline_reminder_interval_minutes": {
+                "offline_reminder_interval_(minutes)": {
                     "title": "Offline Reminder Interval (minutes)",
-                    "x-name": "offline_reminder_interval_minutes",
+                    "x-name": "offline_reminder_interval_(minutes)",
                     "x-hidden": false,
-                    "type": ["integer", "null"],
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "How often to send reminders while device stays offline (0 to disable)",
                     "default": 60,
@@ -125,7 +146,10 @@
                     "title": "Enable Threshold Alerts",
                     "x-name": "enable_threshold_alerts",
                     "x-hidden": false,
-                    "type": ["boolean", "null"],
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Send Slack notifications when tag values exceed thresholds",
                     "default": false
@@ -135,7 +159,7 @@
                     "x-name": "tag_thresholds",
                     "x-hidden": false,
                     "type": "array",
-                    "x-required": false,
+                    "x-required": true,
                     "description": "Configure tag thresholds that trigger alerts",
                     "items": {
                         "title": "Threshold",
@@ -156,23 +180,26 @@
                                 "title": "Upper Limit",
                                 "x-name": "upper_limit",
                                 "x-hidden": false,
-                                "type": ["number", "null"],
-                                "x-required": false,
+                                "type": "number",
+                                "x-required": true,
                                 "description": "Alert when tag value exceeds this (leave empty to disable)"
                             },
                             "lower_limit": {
                                 "title": "Lower Limit",
                                 "x-name": "lower_limit",
                                 "x-hidden": false,
-                                "type": ["number", "null"],
-                                "x-required": false,
+                                "type": "number",
+                                "x-required": true,
                                 "description": "Alert when tag value falls below this (leave empty to disable)"
                             },
                             "alert_message": {
                                 "title": "Alert Message",
                                 "x-name": "alert_message",
                                 "x-hidden": false,
-                                "type": ["string", "null"],
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
                                 "x-required": false,
                                 "description": "Custom alert message. Use {tag}, {value}, {limit}, {device} placeholders",
                                 "default": "{tag} is {value} (threshold: {limit}) on {device}"
@@ -181,30 +208,43 @@
                                 "title": "Cooldown Minutes",
                                 "x-name": "cooldown_minutes",
                                 "x-hidden": false,
-                                "type": ["integer", "null"],
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
                                 "x-required": false,
                                 "description": "Minimum time between repeated alerts for this threshold",
                                 "default": 15
                             }
                         },
                         "additionalElements": true,
-                        "required": ["tag_name"]
+                        "required": [
+                            "tag_name",
+                            "upper_limit",
+                            "lower_limit"
+                        ]
                     }
                 },
                 "include_device_name": {
                     "title": "Include Device Name",
                     "x-name": "include_device_name",
                     "x-hidden": false,
-                    "type": ["boolean", "null"],
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "Include the device name in Slack messages",
                     "default": true
                 },
-                "request_timeout_seconds": {
+                "request_timeout_(seconds)": {
                     "title": "Request Timeout (seconds)",
-                    "x-name": "request_timeout_seconds",
+                    "x-name": "request_timeout_(seconds)",
                     "x-hidden": false,
-                    "type": ["integer", "null"],
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
                     "x-required": false,
                     "description": "HTTP request timeout for Slack API calls",
                     "default": 30,
@@ -216,8 +256,23 @@
             "required": [
                 "dv_proc_subscriptions",
                 "dv_proc_schedules",
-                "slack_webhook_url"
+                "slack_webhook_url",
+                "tag_thresholds"
             ]
-        }
+        },
+        "id": "144411605231259656",
+        "key": null,
+        "owner_org_id": null,
+        "organisation_id": null,
+        "code_repo_id": null,
+        "container_registry_profile_id": null,
+        "repo_branch": "main",
+        "image_name": null,
+        "icon_url": null,
+        "banner_url": null,
+        "staging_config": {},
+        "export_config_command": null,
+        "run_command": null,
+        "lambda_arn": null
     }
 }
