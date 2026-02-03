@@ -1,7 +1,7 @@
 {
     "slack_processor": {
         "name": "slack_processor",
-        "display_name": "Slack Processor",
+        "display_name": "Slack",
         "type": "PRO",
         "visibility": "PUB",
         "allow_many": true,
