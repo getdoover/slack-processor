@@ -1,0 +1,26 @@
+[project]
+name = "slack-processor"
+version = "0.1.0"
+description = "Doover processor that sends Slack notifications based on channel events, device offline status, and tag thresholds"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydoover>=0.4.13",
+    "requests>=2.32.0",
+]
+
+[project.scripts]
+export-config = "slack_processor.app_config:export"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+]
+
+[tool.uv.sources]
+pydoover = { git = "https://github.com/getdoover/pydoover", branch = "doover-2" }
